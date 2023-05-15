@@ -44,32 +44,31 @@ To install the required dependencies, follow these steps:
 
 ## initializing and running the Ten Thousand
 To initialize and run the Ten Thousand game:
+1. create environment (contaner):
+```
+python -m venv .venv
+```
+if nothing appear that means ecry thing is ok , to make sure type `la` to see the invisable venv file
 
-1. Make sure you have Python 3 or Python x installed on your system.
-2. Open a terminal (Ubuntu).
-3. Navigate to the directory where the code is located (`ten_thousand`).<br>
+2. activate the environment:
+```
+source .venv/bin/activate
+```
+now it will appear like this `(.venv)` will appear in the starting of the line which will indicate that your environment is activated, when you want to deactivate it just type the command `deactivate`
 
-`cd ten_thousand<br>
-`
-4. Start run the following command to start the Game.<br>
-Click here
-[ten-thousand](./)
-
+3. install packages:   
+now inside the environment we will install all the packages we need using `pip` 
+```
+pip install
+```
 ## To use the Ten Thousand game library
 
-1. Install the library by running the following command
-
-   ```
-
-   pip install ten_thousand
-
-   ```
-
-2. Import the `GameLogic` class as follows:
-
-```python
-from ten_thousand.game_logic import GameLogic
+to run the code type:
 ```
+python ten_thousand/game_logic.py
+```
+
+
 ## Tests
 
 To run the tests for the Ten Thousand game:
