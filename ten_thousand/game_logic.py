@@ -4,7 +4,10 @@ class GameLogic:
 
     @staticmethod
     def roll_dice(n):
-        """Return a tuple of n random dice rolls."""
+        """
+        input : n --> number of dice you want to roll.
+        output -----> a tuple of n random dice rolls.
+        """
         # A list comprehension is used inside a tuple() function to generate n random numbers between 1 and 6.
         # random.randint(1, 6) generates a random integer between 1 and 6.
         # The underscore _ is a convention for a variable that we don't care about its actual value.
@@ -13,6 +16,10 @@ class GameLogic:
 
     @staticmethod
     def calculate_score(dice):
+        """
+      input : dice ---> list that returned from dice rolls function 
+      output -------> integer number represents the score you git from your dice based on the game rules
+        """
         # Returns 0 if the dice tuple is empty or None.
         if not dice: 
             return 0
