@@ -21,12 +21,13 @@ class GameLogic:
       output -------> integer number represents the score you git from your dice based on the game rules
         """
         # Returns 0 if the dice tuple is empty or None.
+        
         if not dice: 
             return 0
 
         # Creates a list that counts the occurrences of each dice value (1 to 6).
         counts = [dice.count(value) for value in range(1, 7)]
-        print(counts)
+        
         # Initializes the score to 0.
         score = 0
 
@@ -64,4 +65,4 @@ class GameLogic:
         return score
     
 if __name__ == "__main__":
-    GameLogic.calculate_score(5)
+    print (GameLogic.calculate_score(GameLogic.roll_dice(6)))
