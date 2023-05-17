@@ -9,6 +9,19 @@ class Game:
         self.rolls = []
         self.unbanked_points = 0
 
+    def welcome(self):
+        start = input("""
+Welcome to Ten Thousand
+(y)es to play or (n)o to decline 
+> """) 
+        if start == "y":
+            Game.play(self)
+        elif start == "n":
+            print("OK. Maybe another time")
+        else:
+                Game.welcome(self)
+ 
+
     def play(self):
         while True:
             self.rolls = GameLogic.roll_dice(6)
@@ -40,4 +53,6 @@ class Game:
 
 if __name__ == "__main__":
     game = Game()
-    game.play()
+    game.welcome()
+
+   

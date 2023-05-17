@@ -20,12 +20,12 @@ class GameLogic:
       input : dice ---> list that returned from dice rolls function 
       output -------> integer number represents the score you git from your dice based on the game rules
         """
-        print(dice) 
+        
         if not dice: 
             return 0  # Returns 0 if the dice tuple is empty or None.
         
         counts_list = [dice.count(value) for value in range(1, 7)] # Creates a list that counts the occurrences of each dice value (1 to 6).
-        print(counts_list)  #ex: counts = ["count_1s","count_2s","count_3s","count_4s","count_5s","count_6s"]
+       #ex: counts = ["count_1s","count_2s","count_3s","count_4s","count_5s","count_6s"]
         score = 0 # Initializes the score to 0.
         value_one_is_counted = False # this variable declared because I will need it later when score calculation for the value of one occurrence
         value_five_is_counted = False # this variable declared because I will need it later when score calculation for the value of five occurrence
