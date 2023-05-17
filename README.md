@@ -1,7 +1,7 @@
 
 # LAB - Class 06
 
-# Project: Ten-thousand
+# Project: Ten-thousand V2
 
 ## Authors || Group Names
 
@@ -61,11 +61,11 @@ now inside the environment we will install all the packages we need using `pip`
 ```
 pip install
 ```
-## To use the Ten Thousand game library
+## To run the Ten Thousand game 
 
 to run the code type:
 ```
-python ten_thousand/game_logic.py
+python ten_thousand/game.py
 ```
 
 

@@ -21,7 +21,7 @@ Welcome to Ten Thousand
         else:
                 Game.welcome(self)
  
-
+    
     def play(self):
         while True:
             self.rolls = GameLogic.roll_dice(6)
@@ -54,5 +54,6 @@ Welcome to Ten Thousand
 if __name__ == "__main__":
     game = Game()
     game.welcome()
+    
 
    
