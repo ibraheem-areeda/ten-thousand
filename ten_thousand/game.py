@@ -74,8 +74,7 @@ Welcome to Ten Thousand
                 # self.unbanked_points += GameLogic.calculate_score(keep)
 
 
-                action = input("""
-(r)oll again, (b)ank your points or (q)uit: 
+                action = input("""(r)oll again, (b)ank your points or (q)uit: 
 > """)
                 if action.lower() == "r":
                     print (f"Rolling {6-len(keep)} dice...")
