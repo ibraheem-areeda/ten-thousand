@@ -1,7 +1,7 @@
 
 # LAB - Class 06
 
-# Project: Ten-thousand V2
+# Project: Ten-thousand V3
 
 ## Authors || Group Names
 
