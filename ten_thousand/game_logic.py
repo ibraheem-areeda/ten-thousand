@@ -48,5 +48,50 @@ class GameLogic:
         
         return score # Returns the final calculated score.
     
+    @staticmethod
+    def validate_keepers(roll, keepers):
+        """
+        input : roll ---> tuple representing the rolled dice
+                keepers ---> tuple representing the selected dice to keep
+        output ---> boolean indicating whether the selected keepers are valid or not
+        """
+        roll_counts = [roll.count(value) for value in range(1, 7)]
+        keepers_counts = [keepers.count(value) for value in range(1, 7)]
+
+        for i in range(1, 7):
+            if keepers_counts[i-1] > roll_counts[i-1]:
+                return False
+        for keeper in keepers:
+            if keeper not  in roll:
+                return False
+        
+        return True
+    
+
+    @staticmethod
+    def get_scorers(dice):
+        """
+        input : dice ---> tuple representing the rolled dice
+        output ---> tuple representing the selected scoring dice
+        """
+        counts_list = [dice.count(value) for value in range(1, 7)]
+        scorers = []
+
+        for i in range(6):
+            if counts_list[i] >= 3:
+                scorers.extend([i+1] * 3)
+        
+        scorers.extend([1] * counts_list[0])
+        scorers.extend([5] * counts_list[4])
+
+        return tuple(scorers)
+    
+
 if __name__ == "__main__":
-    print (GameLogic.calculate_score(GameLogic.roll_dice(6)))
+    dice = (6,8,7,4,3,7)
+
+    rolls = [(6,8,7,4,3,7),(1,2,3,4,5,6)]
+    def mock_roller():
+        return rolls.pop(0) if rolls else GameLogic.roll_dice
+    
+    GameLogic.zilcher(rolls)
