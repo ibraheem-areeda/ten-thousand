@@ -64,5 +64,21 @@ class GameLogic:
         
         return True
     
+    def zilcher(self):
+        print("""****************************************
+**        Zilch!!! Round over         **
+****************************************""")
+        self.round += 1
+        self.unbanked_points = 0
+        
+        
+
+
 if __name__ == "__main__":
-    print (GameLogic.calculate_score(GameLogic.roll_dice(6)))
+    dice = (6,8,7,4,3,7)
+
+    rolls = [(6,8,7,4,3,7),(1,2,3,4,5,6)]
+    def mock_roller():
+        return rolls.pop(0) if rolls else GameLogic.roll_dice
+    
+    GameLogic.zilcher(rolls)
