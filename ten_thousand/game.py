@@ -21,11 +21,16 @@ Welcome to Ten Thousand
         else:
             Game.welcome(self)
     
+    def print_cheater(self):
+        print("Cheater!!! Or possibly made a typo...")
+        print("*** " + " ".join(map(str, self.rolls)) + " ***")
+
     def play(self):
-        rolls = [(1,2,5,1,2,1),(4,4),(1,1,2,5, 1, 6)]
+        # rolls = [(2,4,1,4,1,2),(4,4),(1,1,2,5, 1, 6)] #for testing purposes
 
         while True:
-            self.rolls = Game.mock_roller(rolls)
+            # self.rolls = Game.mock_roller(rolls) #for testing purposes
+            self.rolls = GameLogic.roll_dice(6)
             print(f"Starting round {self.round}")
             print(f"Rolling 6 dice...")
             print("*** " + " ".join(map(str, self.rolls)) + " ***")
@@ -48,22 +53,23 @@ Welcome to Ten Thousand
                     print(f"Thanks for playing. You earned {self.score} points")
                     return
                 if not keep.isdigit():
+                    Game.print_cheater(self)
                     continue
     
                 keep = tuple(map(int, keep.replace(" ", "")))  # Remove any spaces in the input
                 if not GameLogic.validate_keepers(self.rolls, keep):
-                    print("Cheater!!! Or possibly made a typo...")
-                    print("*** " + " ".join(map(str, self.rolls)) + " ***")
+                    Game.print_cheater(self)
                     continue  # Go back to the beginning of the loop
 
                 scorers = GameLogic.get_scorers(keep)
                 if not scorers:
-                    print("Invalid selection. Selected dice do not score.")
+                    Game.print_cheater(self)
                     continue # Go back to the beginning of the loop
 
                 score = GameLogic.calculate_score(keep)
                 self.unbanked_points += score
-                print(f"You have {self.unbanked_points} unbanked points and {6 - len(keep)} dice remaining")
+                dice_to_roll = len(self.rolls) - len(keep)
+                print(f"You have {self.unbanked_points} unbanked points and {dice_to_roll} dice remaining")
 
                 if len(keep) == 6:  # All dice kept
                     print("Hot dice! Rolling 6 new dice...")
@@ -73,13 +79,13 @@ Welcome to Ten Thousand
                 
                 # self.unbanked_points += GameLogic.calculate_score(keep)
 
-
                 action = input("""(r)oll again, (b)ank your points or (q)uit: 
 > """)
                 if action.lower() == "r":
-                    print (f"Rolling {6-len(keep)} dice...")
-                    self.rolls = Game.mock_roller(rolls)
-                    # GameLogic.roll_dice(6-(len(keep)))
+                    dice_to_roll = len(self.rolls) - len(keep)
+                    print(f"Rolling {dice_to_roll} dice...")
+                    # self.rolls = Game.mock_roller(rolls)
+                    self.rolls = GameLogic.roll_dice(dice_to_roll)
                     print("*** " + " ".join(map(str, self.rolls)) + " ***")
 
                 if action.lower() == "q":
@@ -100,5 +106,3 @@ Welcome to Ten Thousand
 if __name__ == "__main__":
     game = Game()
     game.welcome()
-
-    
