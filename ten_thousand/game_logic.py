@@ -64,15 +64,25 @@ class GameLogic:
         
         return True
     
-    def zilcher(self):
-        print("""****************************************
-**        Zilch!!! Round over         **
-****************************************""")
-        self.round += 1
-        self.unbanked_points = 0
-        
-        
 
+    @staticmethod
+    def get_scorers(dice):
+        """
+        input : dice ---> tuple representing the rolled dice
+        output ---> tuple representing the selected scoring dice
+        """
+        counts_list = [dice.count(value) for value in range(1, 7)]
+        scorers = []
+
+        for i in range(6):
+            if counts_list[i] >= 3:
+                scorers.extend([i+1] * 3)
+        
+        scorers.extend([1] * counts_list[0])
+        scorers.extend([5] * counts_list[4])
+
+        return tuple(scorers)
+    
 
 if __name__ == "__main__":
     dice = (6,8,7,4,3,7)
