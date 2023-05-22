@@ -19,8 +19,7 @@ Welcome to Ten Thousand
         elif start == "n":
             print("OK. Maybe another time")
         else:
-                Game.welcome(self)
- 
+            Game.welcome(self)
     
     def play(self):
         while True:
@@ -30,16 +29,27 @@ Welcome to Ten Thousand
             print("*** " + " ".join(map(str, self.rolls)) + " ***")
 
             while True:
-                keep = input("Enter dice to keep, or (q)uit: ")
+                keep = input("""Enter dice to keep, or (q)uit: 
+> """)
                 if keep.lower() == "q":
                     print(f"Thanks for playing. You earned {self.score} points")
                     return
                 
-                keep = tuple(map(int, keep))
-                self.unbanked_points = GameLogic.calculate_score(keep)
+                keep = tuple(map(int, keep.replace(" ", "")))  # Remove any spaces in the input
+                if not GameLogic.validate_keepers(self.rolls, keep):
+                    print("Cheater!!! Or possibly made a typo...")
+                    print("*** " + " ".join(map(str, self.rolls)) + " ***")
+                    continue  # Go back to the beginning of the loop
+                self.unbanked_points += GameLogic.calculate_score(keep)
                 print(f"You have {self.unbanked_points} unbanked points and {6-len(keep)} dice remaining")
 
+
                 action = input("(r)oll again, (b)ank your points or (q)uit: ")
+                if action.lower() == "r":
+                    print("Rolling 6 dice...")
+                    self.rolls = GameLogic.roll_dice(6)
+                    print("*** " + " ".join(map(str, self.rolls)) + " ***")
+
                 if action.lower() == "q":
                     print(f"Thanks for playing. You earned {self.score} points")
                     return
@@ -48,12 +58,10 @@ Welcome to Ten Thousand
                     print(f"You banked {self.unbanked_points} points in round {self.round}")
                     print(f"Total score is {self.score} points")
                     self.round += 1
-                    break
+                    self.unbanked_points = 0
 
+                    break
 
 if __name__ == "__main__":
     game = Game()
     game.welcome()
-    
-
-   

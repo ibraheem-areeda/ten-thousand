@@ -48,5 +48,21 @@ class GameLogic:
         
         return score # Returns the final calculated score.
     
+    @staticmethod
+    def validate_keepers(roll, keepers):
+        """
+        input : roll ---> tuple representing the rolled dice
+                keepers ---> tuple representing the selected dice to keep
+        output ---> boolean indicating whether the selected keepers are valid or not
+        """
+        roll_counts = [roll.count(value) for value in range(1, 7)]
+        keepers_counts = [keepers.count(value) for value in range(1, 7)]
+
+        for i in range(1, 7):
+            if keepers_counts[i-1] > roll_counts[i-1]:
+                return False
+        
+        return True
+    
 if __name__ == "__main__":
     print (GameLogic.calculate_score(GameLogic.roll_dice(6)))
