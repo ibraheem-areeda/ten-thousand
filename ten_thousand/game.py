@@ -40,8 +40,18 @@ Welcome to Ten Thousand
                     print("Cheater!!! Or possibly made a typo...")
                     print("*** " + " ".join(map(str, self.rolls)) + " ***")
                     continue  # Go back to the beginning of the loop
-                self.unbanked_points += GameLogic.calculate_score(keep)
-                print(f"You have {self.unbanked_points} unbanked points and {6-len(keep)} dice remaining")
+
+                score = GameLogic.calculate_score(keep)
+                self.unbanked_points += score
+                print(f"You have {self.unbanked_points} unbanked points and {6 - len(keep)} dice remaining")
+
+                if len(keep) == 6:  # All dice kept
+                    print("Hot dice! Rolling 6 new dice...")
+                    self.rolls = GameLogic.roll_dice(6)
+                    print("*** " + " ".join(map(str, self.rolls)) + " ***")
+                    continue
+                
+                # self.unbanked_points += GameLogic.calculate_score(keep)
 
 
                 action = input("(r)oll again, (b)ank your points or (q)uit: ")
