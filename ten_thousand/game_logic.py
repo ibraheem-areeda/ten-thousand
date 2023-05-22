@@ -61,6 +61,9 @@ class GameLogic:
         for i in range(1, 7):
             if keepers_counts[i-1] > roll_counts[i-1]:
                 return False
+        for keeper in keepers:
+            if keeper not  in roll:
+                return False
         
         return True
     

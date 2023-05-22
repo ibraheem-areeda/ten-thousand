@@ -47,12 +47,17 @@ Welcome to Ten Thousand
                 if keep.lower() == "q":
                     print(f"Thanks for playing. You earned {self.score} points")
                     return
-     
+    
                 keep = tuple(map(int, keep.replace(" ", "")))  # Remove any spaces in the input
                 if not GameLogic.validate_keepers(self.rolls, keep):
                     print("Cheater!!! Or possibly made a typo...")
                     print("*** " + " ".join(map(str, self.rolls)) + " ***")
                     continue  # Go back to the beginning of the loop
+
+                scorers = GameLogic.get_scorers(keep)
+                if not scorers:
+                    print("Invalid selection. Selected dice do not score.")
+                    continue # Go back to the beginning of the loop
 
                 score = GameLogic.calculate_score(keep)
                 self.unbanked_points += score
