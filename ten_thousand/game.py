@@ -47,6 +47,8 @@ Welcome to Ten Thousand
                 if keep.lower() == "q":
                     print(f"Thanks for playing. You earned {self.score} points")
                     return
+                if not keep.isdigit():
+                    continue
     
                 keep = tuple(map(int, keep.replace(" ", "")))  # Remove any spaces in the input
                 if not GameLogic.validate_keepers(self.rolls, keep):
