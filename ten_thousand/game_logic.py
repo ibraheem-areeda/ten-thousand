@@ -70,20 +70,16 @@ class GameLogic:
 
     @staticmethod
     def get_scorers(dice):
-        """
-        input : dice ---> tuple representing the rolled dice
-        output ---> tuple representing the selected scoring dice
-        """
-        counts_list = [dice.count(value) for value in range(1, 7)]
+        # dice= tuple(dice)
+        all_dice_score = GameLogic.calculate_score(dice)
+        if all_dice_score == 0:
+            return tuple()
         scorers = []
-
-        for i in range(6):
-            if counts_list[i] >= 3:
-                scorers.extend([i+1] * 3)
-        
-        scorers.extend([1] * counts_list[0])
-        scorers.extend([5] * counts_list[4])
-
+        for i, val in enumerate(dice):
+            sub_roll = dice[:i] + dice[i+1:]
+            sub_score = GameLogic.calculate_score(sub_roll)
+            if sub_score != all_dice_score:
+                scorers.append(val)
         return tuple(scorers)
     
 
