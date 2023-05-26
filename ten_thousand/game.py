@@ -1,5 +1,6 @@
 import random
-from game_logic import GameLogic
+from ten_thousand.game_logic import GameLogic
+# from game_logic import GameLogic
 
 class Game:
 
@@ -10,10 +11,9 @@ class Game:
         self.unbanked_points = 0
 
     def welcome(self):
-        start = input("""
-Welcome to Ten Thousand
-(y)es to play or (n)o to decline 
-> """) 
+        print("Welcome to Ten Thousand")
+        print("(y)es to play or (n)o to decline")
+        start = input(">") 
         if start == "y":
             Game.play(self)
         elif start == "n":
@@ -46,10 +46,9 @@ Welcome to Ten Thousand
                     print(f"Total score is {self.score} points")
                     self.round += 1
                     break
-
-                keep = input("""Enter dice to keep, or (q)uit: 
-> """)
-                if keep.lower() == "q":
+                print("Enter dice to keep, or (q)uit:")
+                keep = input(">")
+                if keep.lower() == "q" or self.round > 20:
                     print(f"Thanks for playing. You earned {self.score} points")
                     return
                 if not keep.isdigit():
@@ -78,20 +77,19 @@ Welcome to Ten Thousand
                     continue
                 
                 # self.unbanked_points += GameLogic.calculate_score(keep)
-
-                action = input("""(r)oll again, (b)ank your points or (q)uit: 
-> """)
-                if action.lower() == "r":
+                print("(r)oll again, (b)ank your points or (q)uit:")
+                action = input(">")
+                if action == "r":
                     dice_to_roll = len(self.rolls) - len(keep)
                     print(f"Rolling {dice_to_roll} dice...")
                     # self.rolls = Game.mock_roller(rolls)
                     self.rolls = GameLogic.roll_dice(dice_to_roll)
                     print("*** " + " ".join(map(str, self.rolls)) + " ***")
 
-                if action.lower() == "q":
+                if action == "q":
                     print(f"Thanks for playing. You earned {self.score} points")
                     return
-                elif action.lower() == "b":
+                elif action == "b":
                     self.score += self.unbanked_points
                     print(f"You banked {self.unbanked_points} points in round {self.round}")
                     print(f"Total score is {self.score} points")
